@@ -1,0 +1,18 @@
+<div class="p-5">
+    <p class="fs-1 darkPurple text-center mt-5 ff">Bem vindo!</p>
+    <form name="formlogin">
+        <div class="user-box mx-3">
+            <input type="number" autocomplete="off" required="" ng-maxlength="6" 
+                ng-model="user.accountNumber" ng-required="true" ng-minlength="6"/>
+            <label for="number">Account Number:</label>
+        </div>
+    </form>
+    <div class="d-grid gap-2 mx-auto my-3">
+        <button class="btn btn-success p-2" type="button" ng-disabled="formlogin.$invalid"
+         ng-click="login(user)">Entrar</button>
+        <p class="my-1 text-center fs-8 darkPurple font-weight-bold">
+            Não tem uma conta ainda? Cadastre-se rapidamente!
+        </p>
+        <a href="#!/newaccount"><button class="btn btn-success p-2 btnLong" type="button">Cadastrar-se</button></a>
+    </div>
+</div>

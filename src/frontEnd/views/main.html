@@ -1,0 +1,100 @@
+<div class="container text-center p-4">
+    <div class="row">
+        <div class="col-md-8 text-start darkPurple">
+            <p class="ff fb fs-2">Bom dia</p>
+            <p class="fs-4 mt fg mtm-1">Sr(a). {{name}}</p>
+        </div>
+        <div class="col-6 col-md-4 text-end darkPurple">
+            <p class="ff fb fs-2">Saldo atual</p>
+            <p class="fs-4 mt fg mtm-2">R${{currentBalance}}</p>
+        </div>
+    </div>
+
+    <form name="withdrawform">
+        <div class="user-box mx-8 mt-7">
+            <input type="number" autocomplete="off" required="" min="10" step="10"
+                ng-model="withdrawValue" ng-required="true"/>
+            <label for="number">Valor para o saque:</label>
+        </div>
+    </form>
+    <div class="d-grid gap-2 col-5 mx-auto my-3">
+        <button class="btn btn-success p-2" type="button" ng-disabled="withdrawform.$invalid"
+            ng-click="withdraw(withdrawValue)">Sacar</button>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-8 text-start">
+            <button type="button" ng-click="logout()" class="btn btn-outline-danger mt-5">Sair</button>
+        </div>
+        <div class="col-6 mt-2 col-md-4 text-end darkPurple">
+            <p class="fs-6 mt-5 fg fb"><a ng-click="showExtract()">Ver extrato</a></p>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="notesModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header colorHeaderModal">
+                <h5 class="modal-title" id="exampleModalLabel">CONFIRMAR</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center colorBgModal">
+                <div class="my-1">
+                    Você irá sacar as seguintes cédulas:
+                    <table class="table table-bordered mt-3 table-dark align-middle">
+                        <thead>
+                            <tr>
+                              <th scope="col">Cédula</th>
+                              <th scope="col">Valor</th>
+                              <th scope="col">Quantidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="notas.n100">
+                              <th><img src="src/frontEnd/img/100.jpg" width="110" height="50"></th>
+                              <td>100</td>
+                              <td>{{notas.n100}}</td>
+                            </tr>
+                            <tr ng-show="notas.n50">
+                                <th><img src="src/frontEnd/img/50.jpg" width="110" height="50"></th>
+                                <td>50</td>
+                                <td>{{notas.n50}}</td>
+                            </tr>
+                            <tr ng-show="notas.n20">
+                                <th><img src="src/frontEnd/img/20.jpg" width="110" height="50"></th>
+                                <td>20</td>
+                                <td>{{notas.n20}}</td>
+                            </tr>
+                            <tr ng-show="notas.n10">
+                                <th><img src="src/frontEnd/img/10.jpg" width="110" height="50"></th>
+                                <td>10</td>
+                                <td>{{notas.n10}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="fs-2 fb">Valor: {{withdrawValue}}</p>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-lg mt-3 colorButtonModal" ng-click="confirm()">Confirmar & Sacar</button> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="extractModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header colorHeaderModal">
+                <h5 class="modal-title" id="exampleModalLabel">Extrato</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center colorBgModal">
+                <div ng-repeat="info in infos" class="my-1">
+                    Dia: {{info.day}} | Saldo : {{info.dayBalance}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
